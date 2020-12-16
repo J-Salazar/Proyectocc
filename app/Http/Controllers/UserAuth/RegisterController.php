@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\UserAuth;
 
+use App\Stakeholder;
 use App\User;
+use Illuminate\Http\Request;
 use Validator;
+use App\Cliente;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +73,53 @@ class RegisterController extends Controller
             'institucion' => $data['institucion'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    protected function createcliente(Request $request)
+    {
+        //dd($request);
+        $new_cliente = new Cliente;
+
+        //$new_cliente -> orgnzs() -> associate($orgnz);
+        $new_cliente->cliente      = $request->cliente ;
+        $new_cliente->replegal= $request->replegal;
+        $new_cliente->ruc       = $request->ruc;
+        $new_cliente->telf        = $request->telf;
+        $new_cliente->email        = $request->email;
+        $new_cliente->dir        = $request->dir;
+
+
+
+        $new_cliente -> save();
+
+        /*return Cliente::create([
+            'cliente' => $request['cliente'],
+            'replegal' => $request['replegal'],
+            'ruc' => $request['ruc'],
+            'telf' => $request['telf'],
+            'email' => $request['email'],
+            'dir' => $request['dir'],
+
+        ]);*/
+        return redirect(url('user/home'));
+    }
+
+    protected function crearstakeholder(Request $request, $userid)
+    {
+        //dd($request);
+        $new_stakeholder = new Stakeholder;
+
+        $new_stakeholder->userid      = $request->userid ;
+        $new_stakeholder->nombre = $request->nombre;
+        $new_stakeholder->telefono       = $request->telefono;
+        $new_stakeholder->direccion        = $request->direccion;
+        $new_stakeholder->email        = $request->email;
+
+
+
+        $new_stakeholder -> save();
+
+        return redirect(url('user/home'));
     }
 
     /**

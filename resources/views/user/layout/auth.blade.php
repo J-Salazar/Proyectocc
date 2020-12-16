@@ -13,6 +13,9 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
 
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/auth.css" rel="stylesheet">
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
